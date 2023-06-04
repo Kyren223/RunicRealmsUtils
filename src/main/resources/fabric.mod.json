@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "rrutils",
+	"version": "${version}",
+	"name": "RRUtils",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Kyren223"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "Copyright (c)",
+	"icon": "assets/rrutils/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "me.kyren223.rrutils.core.RRUtils"
+		],
+		"client": [
+			"me.kyren223.rrutils.core.RRUtilsClient"
+		]
+	},
+	"mixins": [
+		"rrutils.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.19",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

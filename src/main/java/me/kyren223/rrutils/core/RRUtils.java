@@ -1,3 +1,6 @@
+/*
+ * Copyright © 2023 Kyren223. All rights reserved.
+ */
 package me.kyren223.rrutils.core;
 
 import me.kyren223.rrutils.config.RRUtilsConfig;

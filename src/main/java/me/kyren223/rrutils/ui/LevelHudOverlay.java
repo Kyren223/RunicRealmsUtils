@@ -1,7 +1,9 @@
+/*
+ * Copyright © 2023 Kyren223. All rights reserved.
+ */
 package me.kyren223.rrutils.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.kyren223.rrutils.config.ConfigModel;
 import me.kyren223.rrutils.core.RRUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;

@@ -1,6 +1,8 @@
+/*
+ * Copyright © 2023 Kyren223. All rights reserved.
+ */
 package me.kyren223.rrutils.ui;
 
-import me.kyren223.rrutils.config.ConfigModel;
 import me.kyren223.rrutils.core.RRUtils;
 import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;

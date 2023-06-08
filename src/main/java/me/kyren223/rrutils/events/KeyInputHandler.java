@@ -1,6 +1,8 @@
+/*
+ * Copyright © 2023 Kyren223. All rights reserved.
+ */
 package me.kyren223.rrutils.events;
 
-import me.kyren223.rrutils.config.ConfigModel;
 import me.kyren223.rrutils.core.RRUtils;
 import me.kyren223.rrutils.data.KeyAction;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;

@@ -1,3 +1,6 @@
+/*
+ * Copyright © 2023 Kyren223. All rights reserved.
+ */
 package me.kyren223.rrutils.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -32,7 +35,6 @@ public class HungerHudOverlay implements HudRenderCallback {
         int width = client.getWindow().getScaledWidth();
         int height = client.getWindow().getScaledHeight();
         int x = width / 2;
-        int y = height;
 
         // Set up rendering
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
@@ -41,7 +43,7 @@ public class HungerHudOverlay implements HudRenderCallback {
         // Render empty bar
         RenderSystem.setShaderTexture(0, EMPTY_BAR);
         DrawableHelper.drawTexture(matrixStack,
-                x + BAR_OFFSET_X, y + BAR_OFFSET_Y,
+                x + BAR_OFFSET_X, height + BAR_OFFSET_Y,
                 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
 
         // Calculate amount to fill
@@ -51,7 +53,7 @@ public class HungerHudOverlay implements HudRenderCallback {
         // Render filled bar
         RenderSystem.setShaderTexture(0, FILLED_BAR);
         DrawableHelper.drawTexture(matrixStack,
-                x + BAR_OFFSET_X, y + BAR_OFFSET_Y,
+                x + BAR_OFFSET_X, height + BAR_OFFSET_Y,
                 0, 0, filled, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
     }
 }

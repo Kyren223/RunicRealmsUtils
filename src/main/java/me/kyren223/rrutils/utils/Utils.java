@@ -1,3 +1,6 @@
+/*
+ * Copyright © 2023 Kyren223. All rights reserved.
+ */
 package me.kyren223.rrutils.utils;
 
 import net.minecraft.client.MinecraftClient;
@@ -11,7 +14,6 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -59,9 +61,6 @@ public class Utils {
                 if (s.contains(LEVEL_KEYWORD)) Utils.updateLevel(s);
             }
         }
-
-
-        //player.getServer().getBossBarManager()
     }
 
     private static void updateLevel(String s) {
@@ -88,24 +87,23 @@ public class Utils {
     public static List<Text> getPartyMembers() {
         Collection<PlayerListEntry> entries = Utils.getPlayer().networkHandler.getListedPlayerListEntries();
         List<Text> members = new ArrayList<>();
-        boolean alone = true;
 
         // Get all party members
         for (PlayerListEntry entry : entries)
         {
             Text displayName = entry.getDisplayName();
             if (displayName == null) continue;
-            if (entry.getProfile().getId().equals(getPlayer().getGameProfile().getId())) {
-                members.add(0, getPlayer().getName().copy().formatted(Formatting.GREEN)
-                        .append(MutableText.of(new LiteralTextContent(" (you)"))
-                                .formatted(Formatting.GRAY)));
-            } else {
+            if (displayName.contains(Text.of("❤"))) {
                 members.add(displayName);
-                alone = false;
             }
         }
 
-        if (alone) return new ArrayList<>();
+        if (!members.isEmpty()) {
+            members.add(0, getPlayer().getName().copy().formatted(Formatting.GREEN)
+                    .append(MutableText.of(new LiteralTextContent(" (you)"))
+                            .formatted(Formatting.GRAY)));
+        }
+
         return members;
     }
 }

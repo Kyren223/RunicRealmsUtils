@@ -36,3 +36,6 @@ Please note that this project is copyrighted, and any contributions will be subj
 
 This project is copyrighted by Kyren223. All rights reserved. See the [LICENSE](LICENSE) file for more information.
 
+## Releases
+
+v1.0.0 - [Download](https://www.dropbox.com/s/jt8q8py29s3s49r/rrutils-1.0.0.jar?dl=1)

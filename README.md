@@ -38,4 +38,4 @@ This project is copyrighted by Kyren223. All rights reserved. See the [LICENSE](
 
 ## Releases
 
-v1.0.0 - [Download](https://www.dropbox.com/s/jt8q8py29s3s49r/rrutils-1.0.0.jar?dl=1)
+v1.0.0 - [Download](https://www.dropbox.com/s/jt8q8py29s3s49r/rrutils-1.0.0.jar?dl=1) [Secondary Download](https://drive.google.com/file/d/1H2M99hxggN1cp5LhzYcKgnQUJcnHRzIp/view?usp=sharing)

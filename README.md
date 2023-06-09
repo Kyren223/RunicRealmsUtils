@@ -38,4 +38,4 @@ This project is copyrighted by Kyren223. All rights reserved. See the [LICENSE](
 
 ## Releases
 
-v1.0.3 (latest) - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.0.3)
+v1.0.3 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.0.3)

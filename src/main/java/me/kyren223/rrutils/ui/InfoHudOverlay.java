@@ -13,7 +13,10 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardObjective;
-import net.minecraft.scoreboard.ScoreboardPlayerScore;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
@@ -27,13 +30,14 @@ public class InfoHudOverlay implements HudRenderCallback {
     private static final Identifier BACKGROUND = new Identifier(RRUtils.MOD_ID,
             "textures/background/info_background.png");
 
+    public static List<String> info = new ArrayList<>();
+
     @Override
     public void onHudRender(MatrixStack matrixStack, float tickDelta) {
-        if (!RRUtils.CONFIG.renderHud()) return;
         if (!RRUtils.CONFIG.renderInfo()) return;
         MinecraftClient client = MinecraftClient.getInstance();
         if (client == null) return;
-
+        if (info.isEmpty()) return;
 
         // Set up rendering
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
@@ -58,17 +62,15 @@ public class InfoHudOverlay implements HudRenderCallback {
                     objective.getDisplayName(), RRUtils.CONFIG.showInfoX() + BAR_WIDTH / 2,
                      RRUtils.CONFIG.showInfoY() + offset, 11);
 
-            List<ScoreboardPlayerScore> scores = new ArrayList<>(scoreboard.getAllPlayerScores(objective));
-            Collections.reverse(scores);
-            for (ScoreboardPlayerScore score : scores) {
-                if (score.getScore() <= 8 && score.getScore() >= 4) {
-                    offset += 10;
+            Collections.reverse(info);
+            for (String data : info) {
+                offset += 10;
 
-                    // Draw Text
-                    DrawableHelper.drawTextWithShadow(matrixStack, client.textRenderer,
-                            score.getPlayerName(), RRUtils.CONFIG.showInfoX() + 15,
-                            RRUtils.CONFIG.showInfoY() + offset + 15, 11);
-                }
+                // Draw Text
+                DrawableHelper.drawTextWithShadow(matrixStack, client.textRenderer,
+                        MutableText.of(new LiteralTextContent(data)).formatted(Formatting.YELLOW),
+                        RRUtils.CONFIG.showInfoX() + 15,
+                        RRUtils.CONFIG.showInfoY() + offset + 15, 11);
             }
         }
     }

@@ -23,7 +23,6 @@ public class PartyHudOverlay implements HudRenderCallback {
 
     @Override
     public void onHudRender(MatrixStack matrixStack, float tickDelta) {
-        if (!RRUtils.CONFIG.renderHud()) return;
         if (!RRUtils.CONFIG.showParty()) return;
         MinecraftClient client = MinecraftClient.getInstance();
         if (client == null) return;

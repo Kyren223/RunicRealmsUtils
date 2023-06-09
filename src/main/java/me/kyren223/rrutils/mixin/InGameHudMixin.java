@@ -4,6 +4,7 @@
 package me.kyren223.rrutils.mixin;
 
 import me.kyren223.rrutils.core.RRUtils;
+import me.kyren223.rrutils.utils.Utils;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +19,7 @@ public class InGameHudMixin {
 
     @Inject(method = "renderScoreboardSidebar", at = @At("HEAD"), cancellable = true)
     private void renderScoreboardSidebar(MatrixStack matrices, ScoreboardObjective objective, CallbackInfo ci) {
+        Utils.updateScoreboardData(objective);
         if (RRUtils.CONFIG.disableScoreboard()) ci.cancel();
     }
 

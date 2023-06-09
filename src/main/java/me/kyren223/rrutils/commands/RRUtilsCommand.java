@@ -13,9 +13,18 @@ import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.ScoreboardObjective;
+import net.minecraft.scoreboard.ScoreboardPlayerScore;
+import net.minecraft.scoreboard.Team;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 import static com.mojang.brigadier.arguments.BoolArgumentType.bool;
@@ -50,8 +59,8 @@ public class RRUtilsCommand {
         dispatcher.register(literal("rrutils")
 
         // debug
-        .then(literal("debug")
-                .executes(ctx -> debug(ctx.getSource())))
+//        .then(literal("debug")
+//                .executes(ctx -> debug(ctx.getSource())))
 
         // setHudTextRenderType
         .then(literal("setHudTextRenderType")
@@ -156,11 +165,32 @@ public class RRUtilsCommand {
     private static int debug(FabricClientCommandSource source) {
         Collection<PlayerListEntry> entries = source.getPlayer().networkHandler.getListedPlayerListEntries();
 
+        // Get all party members
         for (PlayerListEntry entry : entries)
         {
             Text displayName = entry.getDisplayName();
             if (displayName == null) continue;
+            System.out.println(displayName);
             source.getPlayer().sendMessage(displayName);
+            if (displayName.getString().contains("❤")) {
+                source.getPlayer().sendMessage(Text.of("HEART"));
+            } else source.getPlayer().sendMessage(Text.of("NO HEART"));
+        }
+
+        Scoreboard scoreboard = source.getPlayer().getScoreboard();
+
+        Collection<ScoreboardObjective> objectives = scoreboard.getObjectives();
+        for (ScoreboardObjective objective : objectives) {
+            System.out.println("Objective: " + objective.getName());
+            Collection<ScoreboardPlayerScore> scores = scoreboard.getAllPlayerScores(objective);
+            for (ScoreboardPlayerScore score : scores) {
+                String s = score.getPlayerName();
+                System.out.println(s + " | " + score.getScore());
+                Team team = scoreboard.getPlayerTeam(s);
+                if (team == null) continue;
+                System.out.println("Name: " + team.getName() + " / Display: " + team.getDisplayName());
+                System.out.println(team.getPrefix().getString() + " | " + team.getSuffix().getString());
+            }
         }
 
         String stats = """

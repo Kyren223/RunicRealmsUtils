@@ -3,12 +3,13 @@
  */
 package me.kyren223.rrutils.utils;
 
+import me.kyren223.rrutils.ui.InfoHudOverlay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.scoreboard.ScoreboardPlayerScore;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -21,7 +22,6 @@ import java.util.List;
 public class Utils {
     public static final String HEALTH__KEYWORD = "Health";
     public static final String MANA_KEYWORD = "Mana";
-    private static final String LEVEL_KEYWORD = "lv.";
 
     private static void updateHealth(String s) {
         String cleanedInput = s.replaceAll("[^\\d/]+", "");
@@ -30,7 +30,7 @@ public class Utils {
         String[] numbers = cleanedInput.split("/");
 
         if (numbers.length == 2) {
-            PlayerData.health = Integer.parseInt(numbers[0].trim().substring(1));
+            PlayerData.health = Integer.parseInt(numbers[0].trim());
             PlayerData.maxHealth = Integer.parseInt(numbers[1].trim());
         }
     }
@@ -42,36 +42,25 @@ public class Utils {
         String[] numbers = cleanedInput.split("/");
 
         if (numbers.length == 2) {
-            PlayerData.mana = Integer.parseInt(numbers[0].trim().substring(1));
-            PlayerData.maxMana = Integer.parseInt(numbers[1].trim().substring(1));
+            PlayerData.mana = Integer.parseInt(numbers[0].trim());
+            PlayerData.maxMana = Integer.parseInt(numbers[1].trim());
         }
     }
 
-    public static void updateScoreboardData(ClientPlayerEntity player) {
+    public static void updateScoreboardData(ScoreboardObjective objective) {
         // Update health and mana from scoreboard
-        Scoreboard scoreboard = player.getScoreboard();
-        Collection<ScoreboardObjective> objectives = scoreboard.getObjectives();
-        for (ScoreboardObjective objective : objectives) {
-            Collection<ScoreboardPlayerScore> scores = scoreboard.getAllPlayerScores(objective);
-            for (ScoreboardPlayerScore score : scores) {
-                String s = score.getPlayerName();
+        Collection<ScoreboardPlayerScore> scores = objective.getScoreboard().getAllPlayerScores(objective);
+        InfoHudOverlay.info.clear();
+        for (ScoreboardPlayerScore score : scores) {
+            String s = score.getPlayerName();
+            Team team = objective.getScoreboard().getPlayerTeam(s);
+            if (team == null) continue;
 
-                if (s.contains(HEALTH__KEYWORD)) Utils.updateHealth(s);
-                if (s.contains(MANA_KEYWORD)) Utils.updateMana(s);
-                if (s.contains(LEVEL_KEYWORD)) Utils.updateLevel(s);
-            }
+            String prefix = team.getPrefix().getString();
+            if (prefix.contains(HEALTH__KEYWORD)) Utils.updateHealth(prefix);
+            else if (prefix.contains(MANA_KEYWORD)) Utils.updateMana(prefix);
+            else InfoHudOverlay.info.add(prefix);
         }
-    }
-
-    private static void updateLevel(String s) {
-        char[] chars = s.toCharArray();
-        char ones = chars[chars.length - 1];
-        char tens = chars[chars.length - 2];
-        int level = 0;
-        if (Character.isDigit(ones)) level = ones - '0';
-        if (Character.isDigit(tens)) level += 10 * (tens - '0');
-
-        PlayerData.level = level;
     }
 
     public static ClientPlayerEntity getPlayer() {
@@ -93,15 +82,14 @@ public class Utils {
         {
             Text displayName = entry.getDisplayName();
             if (displayName == null) continue;
-            if (displayName.contains(Text.of("❤"))) {
-                members.add(displayName);
+            if (displayName.getString().contains("❤")) {
+                if (entry.getProfile().getId().equals(getPlayer().getGameProfile().getId())) {
+                    members.add(0, getPlayer().getName().copy().formatted(Formatting.GREEN)
+                            .append(MutableText.of(new LiteralTextContent(" (you)"))
+                                    .formatted(Formatting.GRAY)));
+                }
+                else members.add(displayName);
             }
-        }
-
-        if (!members.isEmpty()) {
-            members.add(0, getPlayer().getName().copy().formatted(Formatting.GREEN)
-                    .append(MutableText.of(new LiteralTextContent(" (you)"))
-                            .formatted(Formatting.GRAY)));
         }
 
         return members;

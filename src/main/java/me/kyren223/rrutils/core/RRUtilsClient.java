@@ -6,11 +6,9 @@ package me.kyren223.rrutils.core;
 import me.kyren223.rrutils.commands.RRUtilsCommand;
 import me.kyren223.rrutils.events.KeyInputHandler;
 import me.kyren223.rrutils.events.ModifyChatListener;
-import me.kyren223.rrutils.events.StartTickListener;
 import me.kyren223.rrutils.ui.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -40,6 +38,6 @@ public class RRUtilsClient implements ClientModInitializer {
         HudRenderCallback.EVENT.register(new HungerHudOverlay());
         HudRenderCallback.EVENT.register(new InfoHudOverlay());
         HudRenderCallback.EVENT.register(new PartyHudOverlay());
-        ClientTickEvents.START_CLIENT_TICK.register(new StartTickListener());
+        //ClientTickEvents.END_CLIENT_TICK.register(new EndTickListener());
     }
 }

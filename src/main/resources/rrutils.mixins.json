@@ -3,7 +3,6 @@
 	"package": "me.kyren223.rrutils.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin",
 		"InGameHudMixin"
 	],
 	"injectors": {

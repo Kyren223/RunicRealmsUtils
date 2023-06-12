@@ -12,4 +12,5 @@ public class PlayerData {
     public static float xpProgress;
     public static int xpLevel;
     public static int foodLevel;
+    public static String lastReply = "";
 }

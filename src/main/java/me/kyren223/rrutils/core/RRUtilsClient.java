@@ -3,8 +3,8 @@
  */
 package me.kyren223.rrutils.core;
 
-import com.sun.jna.CallbackResultContext;
 import me.kyren223.rrutils.commands.RRUtilsCommand;
+import me.kyren223.rrutils.commands.ReplyCommand;
 import me.kyren223.rrutils.events.EndTickListener;
 import me.kyren223.rrutils.events.KeyInputHandler;
 import me.kyren223.rrutils.events.ModifyChatListener;
@@ -19,12 +19,8 @@ import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypedActionResult;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class RRUtilsClient implements ClientModInitializer {
     @Override
@@ -38,12 +34,15 @@ public class RRUtilsClient implements ClientModInitializer {
     private void registerCommands() {
         ClientCommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess) -> RRUtilsCommand.register(dispatcher));
+        ClientCommandRegistrationCallback.EVENT.register(
+                (dispatcher, registryAccess) -> ReplyCommand.register(dispatcher));
     }
 
     private void registerEvents() {
         // Register events
         ModifyChatListener modifyChatListener = new ModifyChatListener();
         ClientSendMessageEvents.MODIFY_CHAT.register(modifyChatListener);
+        ClientSendMessageEvents.MODIFY_COMMAND.register(modifyChatListener);
         ClientReceiveMessageEvents.ALLOW_CHAT.register(modifyChatListener);
         HudRenderCallback.EVENT.register(new HealthHudOverlay());
         HudRenderCallback.EVENT.register(new ManaHudOverlay());

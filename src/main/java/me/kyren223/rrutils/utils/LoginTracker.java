@@ -8,10 +8,9 @@ import net.minecraft.util.Formatting;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LoginTracker {
-
+    /*
     private static final List<String> trackedPlayers = new ArrayList<>();
 
     public static void updateTrackedPlayers() {
@@ -22,7 +21,7 @@ public class LoginTracker {
         {
             Text displayName = entry.getDisplayName();
             if (displayName == null) continue;
-            String name = displayName.getString();
+            String name = displayName.getString().trim();
             names.add(name);
 
             // Player is in the list
@@ -42,5 +41,5 @@ public class LoginTracker {
             Utils.sendMessage(name + " logged off!", Formatting.YELLOW);
         }
     }
-
+    */
 }

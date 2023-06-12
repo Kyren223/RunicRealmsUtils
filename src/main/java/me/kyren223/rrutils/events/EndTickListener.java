@@ -14,6 +14,6 @@ public class EndTickListener implements ClientTickEvents.EndTick {
         PlayerData.xpLevel = client.player.experienceLevel;
         PlayerData.foodLevel = client.player.getHungerManager().getFoodLevel();
         PlayerData.healthShield = client.player.getAbsorptionAmount();
-        LoginTracker.updateTrackedPlayers();
+        //LoginTracker.updateTrackedPlayers();
     }
 }

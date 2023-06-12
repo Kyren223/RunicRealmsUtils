@@ -15,7 +15,7 @@ RRUtils is a Minecraft mod designed to enhance the player experience on the Runi
 1. Make sure you have Minecraft Fabric 1.19.4 installed.
 2. Make sure you have downloaded fabric api and it's inside your mods folder [Download](https://www.curseforge.com/minecraft/mc-mods/fabric-api).
 3. Make sure you have downloaded owo-lib api and it's inside your mods folder [Download](https://www.curseforge.com/minecraft/mc-mods/owo-lib).
-4. Download the latest release of RRUtils from [Here](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.0.3).
+4. Download the latest release of RRUtils from [Here](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.1.0).
 5. Place the downloaded JAR file into your Minecraft mods folder.
 6. Launch Minecraft with fabric and enjoy the enhanced gameplay experience on RunicRealms!
 
@@ -38,4 +38,5 @@ This project is copyrighted by Kyren223. All rights reserved. See the [LICENSE](
 
 ## Releases
 
+v1.1.0 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.1.0)
 v1.0.3 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.0.3)

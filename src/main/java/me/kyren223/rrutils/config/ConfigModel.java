@@ -5,11 +5,16 @@ package me.kyren223.rrutils.config;
 
 import io.wispforest.owo.config.annotation.Config;
 import io.wispforest.owo.config.annotation.Modmenu;
+import io.wispforest.owo.config.annotation.RangeConstraint;
 import io.wispforest.owo.config.annotation.SectionHeader;
 import me.kyren223.rrutils.core.RRUtils;
 import me.kyren223.rrutils.data.KeyAction;
+import me.kyren223.rrutils.data.PotionConsumeType;
 import me.kyren223.rrutils.data.TextRenderLocation;
 import me.kyren223.rrutils.data.TextRenderType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Modmenu(modId = RRUtils.MOD_ID)
 @Config(name = "rru-config", wrapperName = "RRUtilsConfig")
@@ -33,5 +38,10 @@ public class ConfigModel {
     public int partyX = 5;
     public int partyY = 130;
     public int partyOpacity = 100;
+
+    @SectionHeader("Utilities")
+    public PotionConsumeType potionConsumeType = PotionConsumeType.EFFICIENT;
+    @RangeConstraint(min = 1, max = 100) public int potionConsumeThreshold = 90;
+    public List<String> playerLoginTrackerList = new ArrayList<>();
 
 }

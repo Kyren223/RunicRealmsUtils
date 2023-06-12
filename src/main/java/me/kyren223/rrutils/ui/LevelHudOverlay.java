@@ -5,6 +5,7 @@ package me.kyren223.rrutils.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.kyren223.rrutils.core.RRUtils;
+import me.kyren223.rrutils.utils.PlayerData;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -30,7 +31,6 @@ public class LevelHudOverlay implements HudRenderCallback {
     public void onHudRender(MatrixStack matrixStack, float tickDelta) {
         if (!RRUtils.CONFIG.renderHud()) return;
         MinecraftClient client = MinecraftClient.getInstance();
-
         if (client == null) return;
 
         // Get screen size
@@ -50,8 +50,7 @@ public class LevelHudOverlay implements HudRenderCallback {
                 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
 
         // Calculate amount to fill
-        assert client.player != null;
-        int filled = (int) (client.player.experienceProgress * BAR_HEIGHT);
+        int filled = (int) (PlayerData.xpProgress * BAR_HEIGHT);
 
         // Render unfilled portion
         RenderSystem.setShaderTexture(0, EMPTY_BAR);
@@ -60,7 +59,7 @@ public class LevelHudOverlay implements HudRenderCallback {
                 0, 0, BAR_WIDTH, BAR_HEIGHT - filled, BAR_WIDTH, BAR_HEIGHT);
 
         // Calculate render values
-        int level = client.player.experienceLevel;
+        int level = PlayerData.xpLevel;
         MutableText text = MutableText.of(new LiteralTextContent("" + level))
                 .formatted(Formatting.GOLD);
 

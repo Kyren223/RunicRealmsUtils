@@ -6,6 +6,7 @@
   "text.config.rru-config.section.Toggles": "Toggles",
   "text.config.rru-config.section.Modes": "Modes",
   "text.config.rru-config.section.Positions": "Positions",
+  "text.config.rru-config.section.Utilities": "Utilities",
 
   "text.config.rru-config.option.renderHud": "Render Hud",
   "text.config.rru-config.option.disableScoreboard": "Disable Scoreboard Sidebar",
@@ -31,5 +32,14 @@
 
   "text.config.rru-config.enum.textRenderType.exact_render": "Exact",
   "text.config.rru-config.enum.textRenderType.percentage_render": "Percentage",
-  "text.config.rru-config.enum.textRenderType.no_render": "None"
+  "text.config.rru-config.enum.textRenderType.no_render": "None",
+
+  "text.config.rru-config.enum.potionConsumeType.normal": "Normal",
+  "text.config.rru-config.enum.potionConsumeType.threshold": "Threshold",
+  "text.config.rru-config.enum.potionConsumeType.efficient": "Efficient",
+
+  "text.config.rru-config.option.potionConsumeType": "Potion Consumption Type",
+  "text.config.rru-config.option.potionConsumeThreshold": "Potion Consumption Threshold",
+  "text.config.rru-config.option.playerLoginTrackerList": "Player Login Tracker"
+
 }

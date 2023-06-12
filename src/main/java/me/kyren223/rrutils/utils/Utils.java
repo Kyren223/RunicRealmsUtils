@@ -67,12 +67,6 @@ public class Utils {
         return MinecraftClient.getInstance().player;
     }
 
-    public static void sendMessage(String s) {
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (player == null) return;
-        player.sendMessage(Text.of(s));
-    }
-
     public static List<Text> getPartyMembers() {
         Collection<PlayerListEntry> entries = Utils.getPlayer().networkHandler.getListedPlayerListEntries();
         List<Text> members = new ArrayList<>();
@@ -83,15 +77,27 @@ public class Utils {
             Text displayName = entry.getDisplayName();
             if (displayName == null) continue;
             if (displayName.getString().contains("❤")) {
-                if (entry.getProfile().getId().equals(getPlayer().getGameProfile().getId())) {
-                    members.add(0, getPlayer().getName().copy().formatted(Formatting.GREEN)
-                            .append(MutableText.of(new LiteralTextContent(" (you)"))
-                                    .formatted(Formatting.GRAY)));
-                }
-                else members.add(displayName);
+                members.add(
+                        MutableText.of(new LiteralTextContent("§a"))
+                                .formatted(Formatting.GREEN).append(displayName));
             }
         }
 
         return members;
     }
+
+    public static void sendMessage(Text text) {
+        Utils.getPlayer().sendMessage(
+                MutableText.of(new LiteralTextContent("[RRUtils] "))
+                .formatted(Formatting.LIGHT_PURPLE).append(text));
+    }
+
+    public static void sendMessage(String s, Formatting color) {
+        sendMessage(MutableText.of(new LiteralTextContent(s)).formatted(color));
+    }
+
+    public static void sendMessage(String s) {
+        sendMessage(s, Formatting.GRAY);
+    }
+
 }

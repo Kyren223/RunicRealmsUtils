@@ -29,6 +29,8 @@ public class HealthHudOverlay implements HudRenderCallback {
             "textures/hud/empty_health_bar.png");
     private static final Identifier FILLED_BAR = new Identifier(RRUtils.MOD_ID,
             "textures/hud/filled_health_bar.png");
+    private static final Identifier SHIELD_BAR = new Identifier(RRUtils.MOD_ID,
+            "textures/hud/shield_bar.png");
 
     @Override
     public void onHudRender(MatrixStack matrixStack, float tickDelta) {
@@ -64,7 +66,17 @@ public class HealthHudOverlay implements HudRenderCallback {
                 x + BAR_OFFSET_X, y + BAR_OFFSET_Y,
                 0, 0, filled, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
 
-        // Calculate render values
+        // Render Shield
+        float shieldPercentage = PlayerData.healthShield / 10; // 10 is "full" absorption hearts
+        shieldPercentage = Math.min(shieldPercentage, 1);
+        int shieldFill = (int) (shieldPercentage * BAR_WIDTH);
+        RenderSystem.setShaderTexture(0, SHIELD_BAR);
+        DrawableHelper.drawTexture(matrixStack,
+                x + BAR_OFFSET_X, y + BAR_OFFSET_Y,
+                0, 0, shieldFill, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
+
+
+        // Create Text
         String addedSymbol = "";
         if (RRUtils.CONFIG.hudTextRenderType() == TextRenderType.NO_RENDER) return;
         int current = 0, max = 0;
@@ -76,12 +88,13 @@ public class HealthHudOverlay implements HudRenderCallback {
             current = PlayerData.health;
             max = PlayerData.maxHealth;
         }
+
         MutableText left = MutableText.of(new LiteralTextContent("" + current + addedSymbol))
-                        .formatted(Formatting.RED);
+                .formatted(Formatting.RED);
         MutableText middle = MutableText.of(new LiteralTextContent(" / "))
-                        .formatted(Formatting.YELLOW);
+                .formatted(Formatting.YELLOW);
         MutableText right = MutableText.of(new LiteralTextContent("" + max + addedSymbol))
-                        .formatted(Formatting.RED);
+                .formatted(Formatting.RED);
         Text combined = left.append(middle).append(right);
 
 

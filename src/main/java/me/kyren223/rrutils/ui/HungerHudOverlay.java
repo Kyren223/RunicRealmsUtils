@@ -5,6 +5,7 @@ package me.kyren223.rrutils.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.kyren223.rrutils.core.RRUtils;
+import me.kyren223.rrutils.utils.PlayerData;
 import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -47,8 +48,7 @@ public class HungerHudOverlay implements HudRenderCallback {
                 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
 
         // Calculate amount to fill
-        int foodLevel = Utils.getPlayer().getHungerManager().getFoodLevel();
-        int filled = (int) ((BAR_WIDTH / 20f) * foodLevel);
+        int filled = (int) ((BAR_WIDTH / 20f) * PlayerData.foodLevel);
 
         // Render filled bar
         RenderSystem.setShaderTexture(0, FILLED_BAR);

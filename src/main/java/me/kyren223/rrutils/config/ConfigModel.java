@@ -42,6 +42,8 @@ public class ConfigModel {
     @SectionHeader("Utilities")
     public PotionConsumeType potionConsumeType = PotionConsumeType.EFFICIENT;
     @RangeConstraint(min = 1, max = 100) public int potionConsumeThreshold = 90;
-    public List<String> playerLoginTrackerList = new ArrayList<>();
+    public boolean safeDrop = true;
+    public boolean notifyLowHunger = true;
+    @RangeConstraint(min = 2, max = 7) public int mountHotbarSlot = 2;
 
 }

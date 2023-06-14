@@ -2,6 +2,10 @@
   "key.category.rrutils": "RR Utils",
   "key.rrutils.toggle_hud": "Toggle Hud",
   "key.rrutils.show_info": "Show Info",
+  "key.rrutils.ride_mount": "Ride Mount",
+  "key.rrutils.open_questbook": "Open Quest Book",
+  "key.rrutils.open_runestone": "Open Runestone",
+  "key.rrutils.use_heartstone": "Use Heartstone",
 
   "text.config.rru-config.section.Toggles": "Toggles",
   "text.config.rru-config.section.Modes": "Modes",
@@ -40,6 +44,8 @@
 
   "text.config.rru-config.option.potionConsumeType": "Potion Consumption Type",
   "text.config.rru-config.option.potionConsumeThreshold": "Potion Consumption Threshold",
-  "text.config.rru-config.option.playerLoginTrackerList": "Player Login Tracker"
+  "text.config.rru-config.option.safeDrop": "Safe Drop",
+  "text.config.rru-config.option.notifyLowHunger": "Notify Low Hunger",
+  "text.config.rru-config.option.mountHotbarSlot": "Mount Hotbar Slot"
 
 }

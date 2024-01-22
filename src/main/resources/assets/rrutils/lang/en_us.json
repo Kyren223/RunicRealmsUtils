@@ -17,6 +17,7 @@
   "text.config.rru-config.option.renderInfo": "Render Info Hud",
   "text.config.rru-config.option.renderShowInfoBackground": "Render Info Hud Background",
   "text.config.rru-config.option.showParty": "Render Party Hud",
+  "text.config.rru-config.option.showActiveQuest": "Render Active Quest",
 
   "text.config.rru-config.option.hudTextRenderType": "Health/Mana Text Render Type",
   "text.config.rru-config.option.hudTextRenderLocation": "Health/Mana Text Render Location",
@@ -27,6 +28,8 @@
   "text.config.rru-config.option.partyX": "Party Hud X",
   "text.config.rru-config.option.partyY": "Party Hud Y",
   "text.config.rru-config.option.partyOpacity": "Party Hud Opacity",
+  "text.config.rru-config.option.activeQuestX": "Active Quest X",
+  "text.config.rru-config.option.activeQuestY": "Active Quest Y",
 
   "text.config.rru-config.enum.keyAction.hold": "Hold",
   "text.config.rru-config.enum.keyAction.toggle": "Toggle",

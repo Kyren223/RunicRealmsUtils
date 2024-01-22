@@ -26,7 +26,7 @@ public class PartyHudOverlay implements HudRenderCallback {
         if (!RRUtils.CONFIG.showParty()) return;
         MinecraftClient client = MinecraftClient.getInstance();
         if (client == null) return;
-
+        
         List<Text> members = Utils.getPartyMembers();
         if (members.isEmpty()) return;
 

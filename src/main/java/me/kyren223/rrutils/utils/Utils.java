@@ -3,15 +3,14 @@
  */
 package me.kyren223.rrutils.utils;
 
-import me.kyren223.rrutils.core.RRUtils;
 import me.kyren223.rrutils.ui.InfoHudOverlay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.scoreboard.ScoreboardPlayerScore;
 import net.minecraft.scoreboard.Team;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -109,10 +108,17 @@ public class Utils {
     }
 
     public static void simulateRightClick(int duration) {
-        MinecraftClient.getInstance().options.useKey.setPressed(true);
+        simulateKey(MinecraftClient.getInstance().options.useKey, duration);
+    }
+    
+    public static void simulateLeftClick(int duration) {
+        simulateKey(MinecraftClient.getInstance().options.attackKey, duration);
+    }
+    
+    public static void simulateKey(KeyBinding key, int duration) {
+        key.setPressed(true);
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        Runnable task = () -> MinecraftClient.getInstance().options.useKey.setPressed(false);
-        executor.schedule(task, duration, TimeUnit.MILLISECONDS);
+        executor.schedule(() -> key.setPressed(false), duration, TimeUnit.MILLISECONDS);
         executor.shutdown();
     }
 }

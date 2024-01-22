@@ -8,14 +8,9 @@ import me.kyren223.rrutils.data.KeyAction;
 import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
@@ -71,9 +66,8 @@ public class KeyInputHandler {
 
     private static void onRideMountKeyPressed(ClientPlayerEntity player) {
         if (player == null) return;
-        PlayerInventory inv = player.getInventory();
-        inv.selectedSlot = RRUtils.CONFIG.mountHotbarSlot() - 1; // -1 for 0-indexing;
-        Utils.simulateRightClick(50);
+        player.getInventory().selectedSlot = 0; // First slot
+        Utils.simulateLeftClick(50);
     }
 
     private static void onOpenQuestbookPressed(ClientPlayerEntity player) {
@@ -92,10 +86,6 @@ public class KeyInputHandler {
         if (player == null) return;
         player.getInventory().selectedSlot = 8; // last slot (9th)
         Utils.simulateRightClick(50);
-    }
-
-    private static void onPressed(ClientPlayerEntity player) {
-        if (player == null) return;
     }
 
     public static void register() {

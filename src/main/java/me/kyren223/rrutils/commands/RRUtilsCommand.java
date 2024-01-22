@@ -8,18 +8,11 @@ import me.kyren223.rrutils.core.RRUtils;
 import me.kyren223.rrutils.data.KeyAction;
 import me.kyren223.rrutils.data.TextRenderLocation;
 import me.kyren223.rrutils.data.TextRenderType;
-import me.kyren223.rrutils.utils.PlayerData;
 import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.ScoreboardObjective;
-import net.minecraft.scoreboard.ScoreboardPlayerScore;
-import net.minecraft.scoreboard.Team;
 import net.minecraft.text.Text;
 
-import java.util.Collection;
 import java.util.Random;
 
 import static com.mojang.brigadier.arguments.BoolArgumentType.bool;
@@ -32,9 +25,8 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 import static net.minecraft.command.CommandSource.suggestMatching;
 
 
+@SuppressWarnings("SameReturnValue")
 public class RRUtilsCommand {
-
-
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         if (dispatcher == null) return;
 
@@ -52,10 +44,15 @@ public class RRUtilsCommand {
         keyActionSuggestions[1] = KeyAction.HOLD.toString();
 
         dispatcher.register(literal("rrutils")
+//        .executes(ctx -> {
+//            MinecraftClient.getInstance().player.sendMessage(
+//                    Text.of("/owo-config rrutils"));
+//            return 0;
+//        })
 
         // debug
-//        .then(literal("debug")
-//                .executes(ctx -> debug(ctx.getSource())))
+        .then(literal("debug")
+                .executes(ctx -> debug(ctx.getSource())))
 
         // setHudTextRenderType
         .then(literal("setHudTextRenderType")
@@ -133,7 +130,7 @@ public class RRUtilsCommand {
 
         // coinflip
         .then(literal("coinflip")
-                .executes(ctx -> coinflip(ctx.getSource(), null))));
+                .executes(ctx -> coinflip(ctx.getSource()))));
 
     }
 
@@ -146,68 +143,29 @@ public class RRUtilsCommand {
         Utils.sendMessage(gamerule + " is now set to: " + value);
     }
 
-    private static int coinflip(FabricClientCommandSource source, Boolean isHead) {
+    private static int coinflip(FabricClientCommandSource source) {
         ClientPlayerEntity player = source.getPlayer();
-        if (isHead != null) {
-            String choice = isHead ? "Heads!" : "Tails!";
-            player.sendMessage(Text.of("You chose" + choice));
-        }
         String result = new Random().nextBoolean() ? "Heads!" : "Tails!";
         player.sendMessage(Text.of("Flipped a coin: " + result));
         return 0;
     }
 
     private static int debug(FabricClientCommandSource source) {
-        Collection<PlayerListEntry> entries = source.getPlayer().networkHandler.getListedPlayerListEntries();
-
-        // Get all party members
-        for (PlayerListEntry entry : entries)
-        {
-            Text displayName = entry.getDisplayName();
-            if (displayName == null) continue;
-            System.out.println(displayName);
-            source.getPlayer().sendMessage(displayName);
-            if (displayName.getString().contains("❤")) {
-                source.getPlayer().sendMessage(Text.of("HEART"));
-            } else source.getPlayer().sendMessage(Text.of("NO HEART"));
-        }
-
-        Scoreboard scoreboard = source.getPlayer().getScoreboard();
-
-        Collection<ScoreboardObjective> objectives = scoreboard.getObjectives();
-        for (ScoreboardObjective objective : objectives) {
-            System.out.println("Objective: " + objective.getName());
-            Collection<ScoreboardPlayerScore> scores = scoreboard.getAllPlayerScores(objective);
-            for (ScoreboardPlayerScore score : scores) {
-                String s = score.getPlayerName();
-                System.out.println(s + " | " + score.getScore());
-                Team team = scoreboard.getPlayerTeam(s);
-                if (team == null) continue;
-                System.out.println("Name: " + team.getName() + " / Display: " + team.getDisplayName());
-                System.out.println(team.getPrefix().getString() + " | " + team.getSuffix().getString());
-            }
-        }
-
-        String stats = """
-                Health: %h / %H
-                Mana: %m / %M
-                """
-                .replace("%h", "" + PlayerData.health)
-                .replace("%H", "" + PlayerData.maxHealth)
-                .replace("%m", "" + PlayerData.mana)
-                .replace("%M", "" + PlayerData.maxMana);
-        source.getPlayer().sendMessage(Text.of(stats));
+        ClientPlayerEntity player = source.getPlayer();
+        player.sendMessage(Text.of("Player: " + player.getName()));
         return 0;
     }
 
     private static int setHudTextRenderType(String type) {
-        if (type.equalsIgnoreCase("EXACT_RENDER"))
-            RRUtils.CONFIG.hudTextRenderType(TextRenderType.EXACT_RENDER);
-        else if (type.equalsIgnoreCase("PERCENTAGE_RENDER"))
-            RRUtils.CONFIG.hudTextRenderType(TextRenderType.PERCENTAGE_RENDER);
-        else if (type.equalsIgnoreCase("NO_RENDER"))
-            RRUtils.CONFIG.hudTextRenderType(TextRenderType.NO_RENDER);
-        else return 0;
+        switch (type) {
+            case "EXACT_RENDER" -> RRUtils.CONFIG.hudTextRenderType(TextRenderType.EXACT_RENDER);
+            case "PERCENTAGE_RENDER" -> RRUtils.CONFIG.hudTextRenderType(TextRenderType.PERCENTAGE_RENDER);
+            case "NO_RENDER" -> RRUtils.CONFIG.hudTextRenderType(TextRenderType.NO_RENDER);
+            default -> {
+                Utils.sendMessage("Invalid type: " + type);
+                return 0;
+            }
+        }
         setGamerule("setHudTextRenderType", type);
         return 0;
     }

@@ -3,6 +3,11 @@
  */
 package me.kyren223.rrutils.utils;
 
+
+import net.minecraft.text.Text;
+
+import java.util.List;
+
 public class PlayerData {
     public static int health;
     public static int maxHealth;
@@ -12,4 +17,5 @@ public class PlayerData {
     public static float xpProgress;
     public static int xpLevel;
     public static int foodLevel;
+    public static List<Text> activeQuest;
 }

@@ -13,9 +13,7 @@ import me.kyren223.rrutils.data.PotionConsumeType;
 import me.kyren223.rrutils.data.TextRenderLocation;
 import me.kyren223.rrutils.data.TextRenderType;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@SuppressWarnings("unused")
 @Modmenu(modId = RRUtils.MOD_ID)
 @Config(name = "rru-config", wrapperName = "RRUtilsConfig")
 public class ConfigModel {
@@ -26,6 +24,7 @@ public class ConfigModel {
     public boolean renderInfo = false;
     public boolean renderShowInfoBackground = true;
     public boolean showParty = true;
+    public boolean showActiveQuest = true;
 
     @SectionHeader("Modes")
     public TextRenderType hudTextRenderType = TextRenderType.EXACT_RENDER;
@@ -38,12 +37,12 @@ public class ConfigModel {
     public int partyX = 5;
     public int partyY = 130;
     public int partyOpacity = 100;
+    public int activeQuestX = 5;
+    public int activeQuestY = 160;
 
     @SectionHeader("Utilities")
     public PotionConsumeType potionConsumeType = PotionConsumeType.EFFICIENT;
     @RangeConstraint(min = 1, max = 100) public int potionConsumeThreshold = 90;
     public boolean safeDrop = true;
     public boolean notifyLowHunger = true;
-    @RangeConstraint(min = 2, max = 7) public int mountHotbarSlot = 2;
-
 }

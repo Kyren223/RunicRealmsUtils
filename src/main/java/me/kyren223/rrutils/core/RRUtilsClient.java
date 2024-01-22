@@ -52,6 +52,7 @@ public class RRUtilsClient implements ClientModInitializer {
         HudRenderCallback.EVENT.register(new HungerHudOverlay());
         HudRenderCallback.EVENT.register(new InfoHudOverlay());
         HudRenderCallback.EVENT.register(new PartyHudOverlay());
+        HudRenderCallback.EVENT.register(new ActiveQuestHudOverlay());
         ClientTickEvents.END_CLIENT_TICK.register(new EndTickListener());
         UseItemCallback.EVENT.register((player, world, hand) -> {
             ItemStack itemStack = player.getStackInHand(hand);

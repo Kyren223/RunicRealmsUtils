@@ -30,14 +30,15 @@ public class PartyHudOverlay implements HudRenderCallback {
         List<Text> members = Utils.getPartyMembers();
         if (members.isEmpty()) return;
 
-        int color1 = (RRUtils.CONFIG.partyOpacity() << 24);
-        int color2 = (RRUtils.CONFIG.partyOpacity() << 24) | (64 << 16) | (64 << 8) | 64;
+        int opacity = (int) (RRUtils.CONFIG.partyOpacity() / 100d * 255);
+        int headerColor = (opacity << 24);
+        int bodyColor = (opacity << 24) | (64 << 16) | (64 << 8) | 64;
 
         // Render Background Header
         DrawableHelper.fill(matrixStack,
                 RRUtils.CONFIG.partyX(), RRUtils.CONFIG.partyY() - 1,
                 RRUtils.CONFIG.partyX() + BAR_WIDTH, RRUtils.CONFIG.partyY() + BAR_HEIGHT,
-                color1);
+                headerColor);
 
         // Render Text Header
         MutableText partyHeader = MutableText.of(new LiteralTextContent("Party Members"))
@@ -52,7 +53,7 @@ public class PartyHudOverlay implements HudRenderCallback {
                 RRUtils.CONFIG.partyX(), RRUtils.CONFIG.partyY() + BAR_HEIGHT,
                 RRUtils.CONFIG.partyX() + BAR_WIDTH,
                 RRUtils.CONFIG.partyY() + TEXT_OFFSET + (BAR_HEIGHT * members.size()) - 1 + BAR_HEIGHT,
-                color2);
+                bodyColor);
 
         // Render Party Members
         for (int i = 0; i < members.size(); i++) {

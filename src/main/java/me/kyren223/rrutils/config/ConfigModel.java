@@ -36,9 +36,11 @@ public class ConfigModel {
     public int showInfoY = 210;
     public int partyX = 5;
     public int partyY = 130;
-    public int partyOpacity = 100;
+    @RangeConstraint(min = 0, max = 100) public int partyOpacity = 50;
     public int activeQuestX = 5;
     public int activeQuestY = 160;
+    @RangeConstraint(min = 0, max = 100) public int activeQuestOpacity = 50;
+    public int activeQuestWidth = 122;
 
     @SectionHeader("Utilities")
     public PotionConsumeType potionConsumeType = PotionConsumeType.EFFICIENT;

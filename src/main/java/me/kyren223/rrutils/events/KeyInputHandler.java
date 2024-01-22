@@ -14,10 +14,6 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 public class KeyInputHandler {
 
     public static final String KEY_CATEGORY = "key.category.rrutils";
@@ -38,7 +34,7 @@ public class KeyInputHandler {
     public static KeyBinding useHeartstone;
     public static KeyBinding sendItemInChat;
     public static KeyBinding sendCoordsInChat;
-
+    
     public static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (toggleHudKey.wasPressed()) onToggleHudKeyPressed(client.player);
@@ -48,8 +44,8 @@ public class KeyInputHandler {
             if (openQuestbook.isPressed()) onOpenQuestbookPressed(client.player);
             if (openRunestone.isPressed()) onOpenRunestonePressed(client.player);
             if (useHeartstone.isPressed()) onUseHeartstonePressed(client.player);
-            if (sendItemInChat.isPressed()) onSendItemInChatPressed(client.player);
-            if (sendCoordsInChat.isPressed()) onSendCoordsInChatPressed(client.player);
+            if (sendItemInChat.wasPressed()) onSendItemInChatJustPressed(client.player);
+            if (sendCoordsInChat.wasPressed()) onSendCoordsInChatJustPressed(client.player);
         });
     }
 
@@ -76,47 +72,37 @@ public class KeyInputHandler {
 
     private static void onRideMountKeyPressed(ClientPlayerEntity player) {
         if (player == null) return;
-        player.networkHandler.sendChatCommand("/mount");
+        player.getInventory().selectedSlot = 0; // First slot
+        Utils.simulateLeftClick(50);
     }
 
     private static void onOpenQuestbookPressed(ClientPlayerEntity player) {
         if (player == null) return;
-        int slot = player.getInventory().selectedSlot;
         player.getInventory().selectedSlot = 7; // 1 prior to last slot (8th)
         Utils.simulateRightClick(50);
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.schedule(() -> player.getInventory().selectedSlot = slot, 50, TimeUnit.MILLISECONDS);
-        executor.shutdown();
     }
 
     private static void onOpenRunestonePressed(ClientPlayerEntity player) {
         if (player == null) return;
-        int slot = player.getInventory().selectedSlot;
         player.getInventory().selectedSlot = 0; // first slot (1st)
         Utils.simulateRightClick(50);
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.schedule(() -> player.getInventory().selectedSlot = slot, 50, TimeUnit.MILLISECONDS);
-        executor.shutdown();
     }
 
     private static void onUseHeartstonePressed(ClientPlayerEntity player) {
         if (player == null) return;
-        int slot = player.getInventory().selectedSlot;
         player.getInventory().selectedSlot = 8; // last slot (9th)
         Utils.simulateRightClick(50);
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.schedule(() -> player.getInventory().selectedSlot = slot, 50, TimeUnit.MILLISECONDS);
-        executor.shutdown();
     }
     
-    private static void onSendItemInChatPressed(ClientPlayerEntity player) {
+    private static void onSendItemInChatJustPressed(ClientPlayerEntity player) {
         if (player == null) return;
         player.networkHandler.sendChatMessage("[item]");
     }
     
-    private static void onSendCoordsInChatPressed(ClientPlayerEntity player) {
+    private static void onSendCoordsInChatJustPressed(ClientPlayerEntity player) {
         if (player == null) return;
         player.networkHandler.sendChatMessage("[coords]");
+        
     }
 
     public static void register() {
@@ -153,12 +139,12 @@ public class KeyInputHandler {
         sendItemInChat = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 KEY_SEND_ITEM_IN_CHAT,
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_T | GLFW.GLFW_MOD_SHIFT,
+                GLFW.GLFW_KEY_Y,
                 KEY_CATEGORY));
         sendCoordsInChat = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 KEY_SEND_COORDS_IN_CHAT,
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_C | GLFW.GLFW_MOD_SHIFT,
+                GLFW.GLFW_KEY_U,
                 KEY_CATEGORY));
         registerKeyInputs();
     }

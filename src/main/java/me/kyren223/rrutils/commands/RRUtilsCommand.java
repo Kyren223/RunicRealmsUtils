@@ -10,7 +10,6 @@ import me.kyren223.rrutils.data.TextRenderLocation;
 import me.kyren223.rrutils.data.TextRenderType;
 import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 

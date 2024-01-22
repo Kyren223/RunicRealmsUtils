@@ -32,6 +32,8 @@
   "text.config.rru-config.option.partyOpacity": "Party Hud Opacity",
   "text.config.rru-config.option.activeQuestX": "Active Quest X",
   "text.config.rru-config.option.activeQuestY": "Active Quest Y",
+  "text.config.rru-config.option.activeQuestOpacity": "Active Quest Opacity",
+  "text.config.rru-config.option.activeQuestWidth": "Active Quest Width",
 
   "text.config.rru-config.enum.keyAction.hold": "Hold",
   "text.config.rru-config.enum.keyAction.toggle": "Toggle",

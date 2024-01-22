@@ -6,6 +6,8 @@
   "key.rrutils.open_questbook": "Open Quest Book",
   "key.rrutils.open_runestone": "Open Runestone",
   "key.rrutils.use_heartstone": "Use Heartstone",
+  "key.rrutils.send_item_in_chat": "Send Item In Chat",
+  "key.rrutils.send_coords_in_chat": "Send Coords In Chat",
 
   "text.config.rru-config.section.Toggles": "Toggles",
   "text.config.rru-config.section.Modes": "Modes",

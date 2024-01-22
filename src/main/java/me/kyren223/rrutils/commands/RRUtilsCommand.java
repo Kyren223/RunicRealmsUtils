@@ -10,6 +10,7 @@ import me.kyren223.rrutils.data.TextRenderLocation;
 import me.kyren223.rrutils.data.TextRenderType;
 import me.kyren223.rrutils.utils.Utils;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 
@@ -45,8 +46,8 @@ public class RRUtilsCommand {
 
         dispatcher.register(literal("rrutils")
 //        .executes(ctx -> {
-//            MinecraftClient.getInstance().player.sendMessage(
-//                    Text.of("/owo-config rrutils"));
+//            if (MinecraftClient.getInstance().player == null) return 0;
+//            MinecraftClient.getInstance().player.networkHandler.sendChatCommand("/rrutils");
 //            return 0;
 //        })
 

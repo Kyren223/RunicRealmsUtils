@@ -9,6 +9,8 @@ RRUtils is a Minecraft mod designed to enhance the player experience on the Runi
 - Display party members on the side of the screen instead of the tab menu
 - Toggleable information screen about your character
 - In-game configuration menu and /rrutils command to customize UI elements and settings
+- Hotkeys to certain actions like Riding a Mount, opening questbook, using heartstone etc
+- Display your current active quest on the side, so you can see it at all times
 
 ## Installation
 
@@ -37,6 +39,8 @@ Please note that this project is copyrighted, and any contributions will be subj
 This project is copyrighted by Kyren223. All rights reserved. See the [LICENSE](LICENSE) file for more information.
 
 ## Releases
+
+v1.3.2 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.3.2)
 
 v1.2.0 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.2.0)
 

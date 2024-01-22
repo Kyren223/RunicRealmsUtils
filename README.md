@@ -9,7 +9,7 @@ RRUtils is a Minecraft mod designed to enhance the player experience on the Runi
 - Display party members on the side of the screen instead of the tab menu
 - Toggleable information screen about your character
 - In-game configuration menu and /rrutils command to customize UI elements and settings
-- Hotkeys to certain actions like Riding a Mount, opening questbook, using heartstone etc
+- Hotkeys to certain actions like riding a mount, opening questbook, using heartstone, etc
 - Display your current active quest on the side, so you can see it at all times
 
 ## Installation
@@ -17,7 +17,7 @@ RRUtils is a Minecraft mod designed to enhance the player experience on the Runi
 1. Make sure you have Minecraft Fabric 1.19.4 installed.
 2. Make sure you have downloaded fabric api and it's inside your mods folder [Download](https://www.curseforge.com/minecraft/mc-mods/fabric-api).
 3. Make sure you have downloaded owo-lib api and it's inside your mods folder [Download](https://www.curseforge.com/minecraft/mc-mods/owo-lib).
-4. Download the latest release of RRUtils from [Here](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.2.0).
+4. Download the latest release of RRUtils from [Here](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.4.0).
 5. Place the downloaded JAR file into your Minecraft mods folder.
 6. Launch Minecraft with fabric and enjoy the enhanced gameplay experience on RunicRealms!
 
@@ -39,6 +39,8 @@ Please note that this project is copyrighted, and any contributions will be subj
 This project is copyrighted by Kyren223. All rights reserved. See the [LICENSE](LICENSE) file for more information.
 
 ## Releases
+
+v1.4.0 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.4.0)
 
 v1.3.2 - [Download](https://github.com/Kyren223/RunicRealmsUtils/releases/tag/v1.3.2)
 
